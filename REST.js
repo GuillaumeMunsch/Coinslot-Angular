@@ -34,6 +34,20 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       });
   });
 
+  //Get payments by coinslot id
+  router.get("/coinslot/:idcoinslot/payments",function(req,res){
+      var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = ?";
+      var table = ["coinslot", "payments", "payments.fk_id_coinslot", "coinslot.idcoinslot", "coinslot.idcoinslot", req.params.idcoinslot];
+      query = mysql.format(query,table);
+      connection.query(query, function(err, rows){
+          if(err) {
+              res.json({"error" : true, "message" : "Error executing MySQL query"});
+          } else {
+              res.json({"error" : false, "message" : "success", "coinslot" : rows});
+          }
+      });
+  });
+
   //Get payments
   router.get("/payments",function(req,res){
       var query = "SELECT * FROM ??";

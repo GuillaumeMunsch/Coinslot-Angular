@@ -1,35 +1,53 @@
-var app = require('express')(); // Express App include
-var http = require('http').Server(app); // http server
-var mysql = require('mysql'); // Mysql include
-var bodyParser = require("body-parser"); // Body parser for fetch posted data
-var connection = mysql.createConnection({ // Mysql Connection
-    host : 'localhost',
-    user : 'coinslot_user',
-    password : 'AzErTy_123456',
-    database : 'coinslot_db',
-});
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); // Body parser use JSON data
-app.get('/coinslot',function(req,res){
-    var data = {
-        "coinslot":0,
-        "maintaince_crew":"",
-        "manufacturer":"",
-        "payments":0,
-        "payment_method":0
-    };
+var express = require("express");
+var mysql   = require("mysql");
+var bodyParser  = require("body-parser");
+var md5 = require('MD5');
+var rest = require("./REST.js");
+var app  = express();
 
-    connection.query("SELECT * from coinslot",function(err, rows, fields){
-        if(rows.length != 0){
-            data["coinslot"] = 0;
-            data["maintaince_crew"] = rows;
-            data["manufacturer"] = rows;
-            data["payments"] = rows;
-            data["payment_method"] = rows;
-            res.json(data);
-        }else{
-            data["coinslot"] = 'No results';
-            res.json(data);
+function REST(){
+    var self = this;
+    self.connectMysql();
+};
+
+REST.prototype.connectMysql = function() {
+    var self = this;
+    var pool      =    mysql.createPool({
+        connectionLimit : 100,
+        host     : 'localhost',
+        user     : 'coinslot_user',
+        password : 'AzErTy_123456',
+        database : 'coinslot_db',
+        debug    :  false
+    });
+    pool.getConnection(function(err,connection){
+        if(err) {
+          self.stop(err);
+        } else {
+          self.configureExpress(connection);
         }
     });
-});
+}
+
+REST.prototype.configureExpress = function(connection) {
+      var self = this;
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(bodyParser.json());
+      var router = express.Router();
+      app.use('/api', router);
+      var rest_router = new rest(router,connection,md5);
+      self.startServer();
+}
+
+REST.prototype.startServer = function() {
+      app.listen(3000,function(){
+          console.log("All right ! I am alive at Port 3000.");
+      });
+}
+
+REST.prototype.stop = function(err) {
+    console.log("ISSUE WITH MYSQL n" + err);
+    process.exit(1);
+}
+
+new REST();

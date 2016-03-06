@@ -8,8 +8,11 @@
         <span flex></span>
       </div>
     </md-toolbar>
-    <md-content layout="row" layout-fill>
-      Content
+    <md-content>
+      <div ng-repeat="coinslot in coinslots">
+        Id: {{ coinslot.idcoinslot }}
+        Slides: {{ coinslot.slide_counter }}
+      </div>
     </md-content>
   </div>
 </section>

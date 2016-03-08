@@ -76,6 +76,20 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       });
   });
 
+  //Get payment type with id
+  router.get("/payment_method/:idmethod", function(req, res){
+    var query = "SELECT * FROM ?? WHERE ??=?";
+    var table = ["payments_method", "id", req.params.idmethod];
+    query = mysql.format(query, table);
+    connection.query(query, function(err, rows){
+      if (err) {
+        res.json({"error" : true, "message" : "Error executing MySQL query"});
+      } else {
+        res.json({"error" : false, "message" : "success", "payment_method" : rows});
+      }
+    })
+  });
+
 }
 
 module.exports = REST_ROUTER;

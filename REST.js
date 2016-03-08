@@ -77,9 +77,15 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
   });
 
   //Get payment type with id
-  router.get("/payment_method/:idmethod", function(req, res){
-    var query = "SELECT * FROM ?? WHERE ??=?";
-    var table = ["payments_method", "id", req.params.idmethod];
+  router.get("/payments/:idpayment/method", function(req, res){
+    var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ??=?";
+    var table = [
+      "payments",
+      "payment_method",
+      "payment_method.id",
+      "payments.fk_id_payment_method",
+      "payments.idpayment",
+      req.params.idpayment];
     query = mysql.format(query, table);
     connection.query(query, function(err, rows){
       if (err) {
@@ -87,7 +93,8 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
       } else {
         res.json({"error" : false, "message" : "success", "payment_method" : rows});
       }
-    })
+    });
+  });
 
   //Get info by coinslot id
   router.get("/coinslot/:idcoinslot/infos",function(req,res){

@@ -8,20 +8,23 @@
         <span flex></span>
       </div>
     </md-toolbar>
-    <md-content>
+    <md-content layout="column">
       <md-list>
         <md-subheader class="md-no-sticky">Coinslots</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="coinslot in coinslots">
-          <div>&nbsp;</div>
-          <div class="md-list-item-text" layout="column">
+        <md-list-item class="md-2-line" ng-repeat="coinslot in coinslots" layout>
+          <div flex="10"></div>
+          <div class="md-list-item-text" layout="column" flex>
             <h3>{{ coinslot.idcoinslot }}</h3>
             <h4>{{ coinslot.slide_counter }}</h4>
             <p>{{ coinslot.full }}</p>
           </div>
-          <div>
+          <md-button class="md-icon-button" aria-label="More" href="/detail/{{coinslot.idcoinslot}}">
+            <md-icon class="material-icons">open_in_new</md-icon>
+          </md-button>
+          <div flex>
             Le lol
           </div>
-          <div>&nbsp;</div>
+          <div flex="10"></div>
         </md-list-item>
       </md-list>
     </md-content>

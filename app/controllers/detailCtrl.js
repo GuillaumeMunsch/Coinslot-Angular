@@ -1,14 +1,7 @@
-app.controller('homeController', ['$http', '$scope', function($http, $scope) {
+app.controller('detailController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
 
+  $scope.coinslotId = $routeParams.id;
   var apiPath = "http://10.39.72.192:3000/api/";
-
-  $http.get(apiPath + 'coinslot').
-    success(function(data) {
-      $scope.coinslots = data.coinslots;
-    }).
-    error(function(data) {
-      console.log("Error on performing GET on /coinslots");
-    });
 
   $scope.getCoinslot = function(id) {
     var path = apiPath + 'coinslot/' + id;

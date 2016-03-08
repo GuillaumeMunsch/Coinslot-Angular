@@ -4,8 +4,12 @@ app.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
     when('/', {
-      templateUrl: 'app/partials/home.html',
+      templateUrl: '/app/partials/home.html',
       controller: 'homeController'
+    }).
+    when('/detail/:id', {
+      templateUrl: '/app/partials/detail.html',
+      controller: 'detailController'
     }).
     otherwise({
       redirectTo: '/'

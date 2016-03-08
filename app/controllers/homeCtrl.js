@@ -40,7 +40,7 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
       $scope.payments = data.coinslot;
     }).
     error(function(data) {
-      console.log("Error on performing GET on /coinslot/:" + id + '/payments');
+      console.log("Error on performing GET on /coinslot/:" + id + '/infos');
     });
   }
 

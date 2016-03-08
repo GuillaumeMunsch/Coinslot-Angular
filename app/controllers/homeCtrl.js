@@ -22,6 +22,19 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
     });
   }
 
+  // Get the payments with payment method for a specific coinslot
+  $scope.getPaymentsDetails = function(id) {
+    var path = apiPath + 'coinslot/' + id + '/payments/details' ;
+    $http.get(path).
+    success(function(data) {
+      $scope.paymentsDetails = data.coinslot;
+    }).
+    error(function(data) {
+      console.log("Error on performing GET on /coinslot/:" + id + '/payments');
+    });
+  }
+
+  // Get the payments for a specific coinslot
   $scope.getPayments = function(id) {
     var path = apiPath + 'coinslot/' + id + '/payments' ;
     $http.get(path).
@@ -33,6 +46,7 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
     });
   }
 
+  // Get infos for the coinslot (manufacturer and maintenance team)
   $scope.getInfos = function(id) {
     var path = apiPath + 'coinslot/' + id + '/infos' ;
     $http.get(path).

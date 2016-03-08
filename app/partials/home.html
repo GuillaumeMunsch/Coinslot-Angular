@@ -9,10 +9,21 @@
       </div>
     </md-toolbar>
     <md-content>
-      <div ng-repeat="coinslot in coinslots">
-        Id: {{ coinslot.idcoinslot }}
-        Slides: {{ coinslot.slide_counter }}
-      </div>
+      <md-list>
+        <md-subheader class="md-no-sticky">Coinslots</md-subheader>
+        <md-list-item class="md-2-line" ng-repeat="coinslot in coinslots">
+          <div>&nbsp;</div>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ coinslot.idcoinslot }}</h3>
+            <h4>{{ coinslot.slide_counter }}</h4>
+            <p>{{ coinslot.full }}</p>
+          </div>
+          <div>
+            Le lol
+          </div>
+          <div>&nbsp;</div>
+        </md-list-item>
+      </md-list>
     </md-content>
   </div>
 </section>

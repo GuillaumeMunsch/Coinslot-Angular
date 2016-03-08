@@ -27,7 +27,7 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
     var path = apiPath + 'coinslot/' + id + '/payments/details' ;
     $http.get(path).
     success(function(data) {
-      $scope.paymentsDetails = data.coinslot;
+      $scope.paymentsDetails = data.payments_details;
     }).
     error(function(data) {
       console.log("Error on performing GET on /coinslot/:" + id + '/payments');

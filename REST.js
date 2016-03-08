@@ -88,6 +88,29 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
         res.json({"error" : false, "message" : "success", "payment_method" : rows});
       }
     })
+
+  //Get info by coinslot id
+  router.get("/coinslot/:idcoinslot/infos",function(req,res){
+      var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = ?";
+      var table = [
+       "coinslot",
+       "manufacturer",
+       "manufacturer.phone_number",
+       "coinslot.fk_id_manufacturer",
+       "maintaince_crew",
+       "coinslot.fk_id_maintaince_crew",
+       "maintaince_crew.phone",
+       "coinslot.idcoinslot",
+       req.params.idcoinslot
+      ];
+      query = mysql.format(query,table);
+      connection.query(query, function(err, rows){
+          if(err) {
+              res.json({"error" : true, "message" : "Error executing MySQL query"});
+          } else {
+              res.json({"error" : false, "message" : "success", "infos" : rows});
+          }
+      });
   });
 
 }

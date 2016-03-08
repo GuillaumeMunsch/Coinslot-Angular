@@ -78,7 +78,7 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 
   //Get payments and their mehtod for a coinslot with coinslot id
   router.get("/coinslot/:idcoinslot/payments/details", function(req, res){
-    var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? INNER JOIN ?? ON ?? = ?? WHERE ??=?";
+    var query = "SELECT idpayment, status, name, date FROM ?? INNER JOIN ?? ON ?? = ?? INNER JOIN ?? ON ?? = ?? WHERE ??=?";
     var table = [
       "coinslot",
       "payments",

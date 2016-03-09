@@ -2,5 +2,8 @@
   "name": "Coinslot-Angular",
   "version": "1.0.0",
   "description": "",
-  "main": "index.html"
+  "main": "index.html",
+  "dependencies": {
+    "angular-material-data-table": "^0.9.12"
+  }
 }

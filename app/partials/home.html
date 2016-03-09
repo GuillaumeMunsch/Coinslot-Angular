@@ -1,32 +1,44 @@
-<section layout="row" flex>
-  <div flex>
+<section layout="row">
+  <div>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>
           <span>Webapp</span>
         </h2>
-        <span flex></span>
+        <span></span>
       </div>
     </md-toolbar>
-    <md-content layout="column">
-      <md-list>
-        <md-subheader class="md-no-sticky">Coinslots</md-subheader>
-        <md-list-item class="md-2-line" ng-repeat="coinslot in coinslots" layout>
-          <div flex="10"></div>
-          <div class="md-list-item-text" layout="column" flex>
-            <h3>{{ coinslot.idcoinslot }}</h3>
-            <h4>{{ coinslot.slide_counter }}</h4>
-            <p>{{ coinslot.full }}</p>
-          </div>
-          <md-button class="md-icon-button" aria-label="More" href="/detail/{{coinslot.idcoinslot}}">
-            <md-icon class="material-icons">open_in_new</md-icon>
-          </md-button>
-          <div flex>
-            Le lol
-          </div>
-          <div flex="10"></div>
-        </md-list-item>
-      </md-list>
+    <md-content>
+      <md-table-container>
+        <table md-table>
+          <thead md-head>
+            <tr layout md-row>
+              <th flex md-column md-numeric>ID</th>
+              <th flex md-column md-numeric>Slide counter</th>
+              <th flex md-column md-numeric>Full</th>
+              <th flex md-column>Detail</th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr layout md-row ng-repeat="coinslot in coinslots">
+              <td flex md-cell>{{coinslot.idcoinslot}}</td>
+              <td flex md-cell>{{coinslot.slide_counter}}</td>
+              <td flex md-cell>{{coinslot.full}}</td>
+              <td flex md-cell>
+                  <a href="/detail/{{coinslot.idcoinslot}}"><md-icon class="material-icons">open_in_new</md-icon></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+<!--
+      <md-table-pagination
+        md-limit="query.limit"
+        md-page="query.page"
+        md-total="{{coinslots.count}}"
+        md-page-select>
+      </md-table-pagination>
+-->
     </md-content>
   </div>
 </section>

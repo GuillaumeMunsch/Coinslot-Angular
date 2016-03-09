@@ -1,0 +1,7 @@
+table.md-table {
+    table-layout: fixed;
+}
+
+td, th {
+  text-align: center !important;
+}

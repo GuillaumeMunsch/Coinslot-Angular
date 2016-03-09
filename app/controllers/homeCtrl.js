@@ -1,10 +1,17 @@
 app.controller('homeController', ['$http', '$scope', function($http, $scope) {
 
-  var apiPath = "http://10.39.72.192:3000/api/";
+  var apiPath = "http://localhost:3000/api/";
+
+  $scope.query = {
+    order: 'idcoinslot',
+    limit: 10,
+    page: 1
+  };
 
   $http.get(apiPath + 'coinslot').
     success(function(data) {
       $scope.coinslots = data.coinslots;
+      console.log("Ok");
     }).
     error(function(data) {
       console.log("Error on performing GET on /coinslots");
@@ -48,15 +55,6 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
   // Get infos for the coinslot (manufacturer and maintenance team)
   $scope.getInfos = function(id) {
     var path = apiPath + 'coinslot/' + id + '/infos' ;
-<<<<<<< HEAD
-      $http.get(path).
-      success(function(data) {
-        $scope.payments = data.coinslot;
-      }).
-      error(function(data) {
-        console.log("Error on performing GET on /coinslot/:" + id + '/payments');
-      });
-=======
     $http.get(path).
     success(function(data) {
       $scope.payments = data.coinslot;
@@ -64,7 +62,6 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
     error(function(data) {
       console.log("Error on performing GET on /coinslot/:" + id + '/infos');
     });
->>>>>>> baa3ecbad1da944b2c13be7c446b8e7bd2f12e61
-  }
+    }
 
 }]);

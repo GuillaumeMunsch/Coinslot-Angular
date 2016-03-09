@@ -1,4 +1,4 @@
-app = angular.module('app', ['ngRoute', 'ngMaterial']);
+app = angular.module('app', ['ngRoute', 'ngMaterial', 'md.data.table']);
 
 app.config(['$routeProvider',
   function($routeProvider) {

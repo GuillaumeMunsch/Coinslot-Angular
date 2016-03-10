@@ -1,4 +1,4 @@
-app.controller('homeController', ['$http', '$scope', function($http, $scope) {
+app.controller('homeController', ['$http', '$scope', '$location', function($http, $scope, $location) {
 
   var apiPath = "http://localhost:3000/api/";
 
@@ -16,6 +16,10 @@ app.controller('homeController', ['$http', '$scope', function($http, $scope) {
     error(function(data) {
       console.log("Error on performing GET on /coinslots");
     });
+
+  $scope.goToDetail = function(idcoinslot) {
+    $location.path('/detail/' + idcoinslot);
+  }
 
   $scope.getCoinslot = function(id) {
     var path = apiPath + 'coinslot/' + id;

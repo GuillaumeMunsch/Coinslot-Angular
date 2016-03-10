@@ -13,19 +13,49 @@
         <table md-table>
           <thead md-head>
             <tr layout md-row>
-              <th flex md-column md-numeric>ID</th>
-              <th flex md-column md-numeric>Slide counter</th>
-              <th flex md-column md-numeric>Full</th>
-              <th flex md-column>Detail</th>
+              <th  class="my-md-cell"flex md-column md-numeric>
+                <div class="my-md-cell">
+                  ID
+                </div>
+              </th>
+              <th class="my-md-cell" flex md-column md-numeric>
+                <div class="my-md-cell">
+                  Slide counter
+                </div>
+              </th>
+              <th class="my-md-cell" flex md-column md-numeric>
+                <div class="my-md-cell">
+                  Full
+                </div>
+              </th>
+              <th class="my-md-cell" flex md-column>
+                <div class="my-md-cell">
+                  Detail
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody md-body>
             <tr layout md-row ng-repeat="coinslot in coinslots">
-              <td flex md-cell>{{coinslot.idcoinslot}}</td>
-              <td flex md-cell>{{coinslot.slide_counter}}</td>
-              <td flex md-cell>{{coinslot.full}}</td>
               <td flex md-cell>
-                  <a href="/detail/{{coinslot.idcoinslot}}"><md-icon class="material-icons">open_in_new</md-icon></a>
+                <div class="my-md-cell">
+                  {{coinslot.idcoinslot}}
+                </div>
+              </td>
+              <td flex md-cell>
+                <div class="my-md-cell">
+                  {{coinslot.slide_counter}}
+              </div>
+                </td>
+              <td flex md-cell>
+                <div class="my-md-cell">
+                  {{coinslot.full}}
+                </div>
+              </td>
+              <td flex md-cell>
+                <md-button ng-click="goToDetail(coinslot.idcoinslot)" class="md-fab md-mini md-warn">
+                  <md-icon class="material-icons">open_in_new</md-icon>
+                </md-button>
               </td>
             </tr>
           </tbody>

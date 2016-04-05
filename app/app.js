@@ -8,7 +8,7 @@ function($routeProvider, $locationProvider) {
     controller: 'homeController'
   }).
   when('/detail/:id', {
-    templateUrl: 'app/partials/detail.html',
+    templateUrl: '/app/partials/detail.html',
     controller: 'detailController'
   }).
   otherwise({

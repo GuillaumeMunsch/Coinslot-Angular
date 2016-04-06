@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2016 at 12:04 PM
+-- Generation Time: Apr 06, 2016 at 12:43 PM
 -- Server version: 5.7.11
 -- PHP Version: 5.5.32
 
@@ -812,14 +812,14 @@ INSERT INTO `payments` (`idpayment`, `fk_id_coinslot`, `fk_id_payment_method`, `
 
 CREATE TABLE `payment_method` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) NOT NULL
+  `method_name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `payment_method`
 --
 
-INSERT INTO `payment_method` (`id`, `name`) VALUES
+INSERT INTO `payment_method` (`id`, `method_name`) VALUES
 (1, 'Cash'),
 (2, 'Visa'),
 (3, 'Manufacturer card'),

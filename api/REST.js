@@ -36,8 +36,17 @@ REST_ROUTER.prototype.handleRoutes= function(router,connection,md5) {
 
   //Get payments by coinslot id
   router.get("/coinslot/:idcoinslot/payments",function(req,res){
-      var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = ?";
-      var table = ["coinslot", "payments", "payments.fk_id_coinslot", "coinslot.idcoinslot", "coinslot.idcoinslot", req.params.idcoinslot];
+      var query = "SELECT * FROM ?? INNER JOIN ?? ON ?? = ?? INNER JOIN ?? ON ?? = ?? WHERE ?? = ?";
+      var table = [
+        "payments",
+        "coinslot",
+        "payments.fk_id_coinslot",
+        "coinslot.idcoinslot",
+        "payment_method",
+        "payments.fk_id_payment_method",
+        "payment_method.id",
+        "coinslot.idcoinslot",
+        req.params.idcoinslot];
       query = mysql.format(query,table);
       connection.query(query, function(err, rows){
           if(err) {

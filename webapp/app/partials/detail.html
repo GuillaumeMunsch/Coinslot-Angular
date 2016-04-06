@@ -51,6 +51,11 @@
               </th>
               <th class="my-md-cell" flex md-column md-numeric>
                 <div class="my-md-cell">
+                  Paid by
+                </div>
+              </th>
+              <th class="my-md-cell" flex md-column md-numeric>
+                <div class="my-md-cell">
                   Status
                 </div>
               </th>
@@ -69,8 +74,13 @@
                 </div>
               </td>
               <td flex md-cell>
+                <div class="my-md-cell">
+                  {{payment.method_name}}
+                </div>
+              </td>
+              <td flex md-cell>
                 <div>
-                  <button class="md-fab md-mini md-raised md-button md-ink-ripple" ng-class="{'md-warn': payment.status == 1, 'md-primary': payment.status != 1}" type="button">
+                  <button class="md-fab md-mini md-raised md-button md-ink-ripple" ng-class="{'md-warn': payment.status == 0, 'md-primary': payment.status != 0}" type="button">
                     <span class="ng-scope">{{payment.status == 1 ? "OK" : "KO"}}</span>
                   </button>
                 </div>

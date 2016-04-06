@@ -25,6 +25,6 @@ function($routeProvider, $locationProvider) {
 }])
 .config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default')
-  .primaryPalette('red')
-  .accentPalette('blue')
+  .primaryPalette('blue')
+  .accentPalette('red')
 });

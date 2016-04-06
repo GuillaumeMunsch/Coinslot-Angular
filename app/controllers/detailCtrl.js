@@ -1,7 +1,7 @@
-app.controller('detailController', ['$http', '$scope', '$routeParams', function($http, $scope, $routeParams) {
+app.controller('detailController', ['$http', '$scope', '$routeParams', '$mdDialog', function($http, $scope, $routeParams, $mdDialog) {
 
   $scope.coinslotId = $routeParams.id;
-  var apiPath = "http://10.39.72.192:3000/api/";
+  var apiPath = "http://localhost:3000/api/";
 
   $scope.getCoinslot = function(id) {
     var path = apiPath + 'coinslot/' + id;
@@ -19,6 +19,7 @@ app.controller('detailController', ['$http', '$scope', '$routeParams', function(
       $http.get(path).
       success(function(data) {
         $scope.payments = data.coinslot;
+        console.log($scope.payments);
       }).
       error(function(data) {
         console.log("Error on performing GET on /coinslot/:" + id + '/payments');
@@ -29,11 +30,46 @@ app.controller('detailController', ['$http', '$scope', '$routeParams', function(
     var path = apiPath + 'coinslot/' + id + '/infos' ;
       $http.get(path).
       success(function(data) {
-        $scope.payments = data.coinslot;
+        $scope.infos = data.infos[0];
       }).
       error(function(data) {
         console.log("Error on performing GET on /coinslot/:" + id + '/payments');
       });
   }
 
+  $scope.getPaymentsInfos = function(id) {
+    var path = apiPath + '/coinslot/' + $scope.coinslotId + '/payments/details' ;
+      $http.get(path).
+      success(function(data) {
+        $scope.paymentDetail = data.coinslot;
+      }).
+      error(function(data) {
+        console.log("Error on performing GET on /coinslot/:" + id + '/payments');
+      });
+  }
+
+  $scope.openManufacturerDialog = function() {
+      $mdDialog.show(
+        $mdDialog.alert()
+          .clickOutsideToClose(true)
+          .title('Manufacturer infos')
+          .textContent('Name: ' + $scope.infos.name + ', ' +
+            'Address: ' + $scope.infos.address + ', ' +
+            'Phone: ' + $scope.infos.fk_id_manufacturer)
+          .ok('OK')
+      );
+    };
+
+    $scope.openMaintainceDialog = function() {
+        $mdDialog.show(
+          $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('Maintaince crew infos')
+            .textContent('Phone: ' + $scope.infos.fk_id_maintaince_crew)
+            .ok('OK')
+        );
+      };
+
+  $scope.getInfos($scope.coinslotId);
+  $scope.getPayments($scope.coinslotId);
 }]);

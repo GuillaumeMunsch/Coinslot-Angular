@@ -8,36 +8,32 @@
       </div>
     </md-toolbar>
     <md-content>
-      <div layout="column" class="layout-column flex-xs">
-        <md-card>
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline">Card with  image</span>
-              <span class="md-subhead">Extra Large</span>
-            </md-card-title-text>
-          </md-card-title>
-          <md-card-content layout="row" layout-align="space-between" class="layout-align-space-between-stretch layout-row">
-            <div class="md-media-xl card-media"></div>
-
-            <md-card-actions layout="column" class="layout-column">
-              <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Favorite">
-                <md-icon md-svg-icon="img/icons/favorite.svg" class="ng-scope" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                  <path d="M0 0h24v24h-24z" fill="none"></path>
-                  <path d="M12 21.35l-1.45-1.32c-5.15-4.67-8.55-7.75-8.55-11.53 0-3.08 2.42-5.5 5.5-5.5 1.74 0 3.41.81 4.5 2.09 1.09-1.28 2.76-2.09 4.5-2.09 3.08 0 5.5 2.42 5.5 5.5 0 3.78-3.4 6.86-8.55 11.54l-1.45 1.31z"></path>
-                </svg></md-icon>
-              </button>
-              <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Settings">
-                <md-icon md-svg-icon="img/icons/menu.svg" class="ng-scope" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 18 18" fit="" preserveAspectRatio="xMidYMid meet" focusable="false">
-                  <path d="M0 0h18v18h-18z" fill="none"></path>
-                  <path d="M2 13.5h14v-1.5h-14v1.5zm0-4h14v-1.5h-14v1.5zm0-5.5v1.5h14v-1.5h-14z"></path>
-                </svg></md-icon>
-              </button>
-              <button class="md-icon-button md-button md-ink-ripple" type="button" ng-transclude="" aria-label="Share">
-                <md-icon md-svg-icon="img/icons/share-arrow.svg" class="ng-scope" aria-hidden="true"><svg version="1.1" x="0px" y="0px" width="100%" height="100%" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" fit="" preserveAspectRatio="xMidYMid meet" focusable="false"><g><g><path fill="#7d7d7d" d="M21,11l-7-7v4C7,9,4,14,3,19c2.5-3.5,6-5.1,11-5.1V18L21,11z"></path><rect fill="none" width="24" height="24"></rect></g></g></svg></md-icon>
-              </button>
+      <div layout>
+        <div flex="33" class="one"></div>
+        <div flex-xs="" flex-gt-xs="50" layout="column" class="layout-column flex-xs flex-gt-xs-50">
+          <md-card>
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Cointlot n°{{coinslotId}}
+                  <button class="md-raised md-button md-ink-ripple" ng-class="{'md-warn': infos.full == 1, 'md-primary': infos.full != 1}" type="button">
+                    <span class="ng-scope">{{infos.full == 0 ? "Ok" : "Full"}}</span>
+                  </button>
+                </span>
+                <span class="md-subhead">The coinslot registred {{payments.length}} payments</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+              <p>First service: {{infos.first_service}}</p>
+              <p>Last maintaince: {{infos.last_maintaince}}</p>
+              <p>Slide counter: {{infos.slide_counter}}</p>
+            </md-card-content>
+            <md-card-actions layout="row" layout-align="end center" class="layout-align-end-center layout-row">
+              <button ng-click="openManufacturerDialog()"  class="md-button md-ink-ripple" type="button"><span class="ng-scope">Manufacturer</span><div class="md-ripple-container"></div></button>
+              <button ng-click="openMaintainceDialog()" class="md-button md-ink-ripple" type="button"><span class="ng-scope">Maintaince Crew</span></button>
             </md-card-actions>
-          </md-card-content>
-        </md-card>
+          </md-card>
+        </div>
+        <div flex="33" class="one"></div>
       </div>
       <md-table-container>
         <table md-table>
@@ -50,42 +46,34 @@
               </th>
               <th class="my-md-cell" flex md-column md-numeric>
                 <div class="my-md-cell">
-                  Slide counter
+                  Date
                 </div>
               </th>
               <th class="my-md-cell" flex md-column md-numeric>
                 <div class="my-md-cell">
-                  Full
-                </div>
-              </th>
-              <th class="my-md-cell" flex md-column>
-                <div class="my-md-cell">
-                  Detail
+                  Status
                 </div>
               </th>
             </tr>
           </thead>
           <tbody md-body>
-            <tr layout md-row ng-repeat="coinslot in [1, 2, 3, 4, 5]">
+            <tr layout md-row ng-repeat="payment in payments">
               <td flex md-cell>
                 <div class="my-md-cell">
-                  lol
+                  {{payment.idpayment}}
                 </div>
               </td>
               <td flex md-cell>
                 <div class="my-md-cell">
-                  omg
+                  {{payment.date}}
                 </div>
               </td>
               <td flex md-cell>
-                <div class="my-md-cell">
-                  omg
+                <div>
+                  <button class="md-fab md-mini md-raised md-button md-ink-ripple" ng-class="{'md-warn': payment.status == 1, 'md-primary': payment.status != 1}" type="button">
+                    <span class="ng-scope">{{payment.status == 1 ? "OK" : "KO"}}</span>
+                  </button>
                 </div>
-              </td>
-              <td flex md-cell>
-                <md-button ng-click="goToDetail(coinslot.idcoinslot)" class="md-fab md-mini md-warn">
-                  <md-icon class="material-icons">open_in_new</md-icon>
-                </md-button>
               </td>
             </tr>
           </tbody>

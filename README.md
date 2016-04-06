@@ -40,7 +40,7 @@ You should see something like
 >All right ! I am alive at Port 3000.
 
 We have now our API running !. Now, we need to run the webpage.
-To do so, go into the 'webapp/' folder and start installing the node modules:
+To do so, open a new terminal, go into the 'webapp/' folder and start installing the node modules:
 ``` sh
 npm install
 ```

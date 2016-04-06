@@ -19,7 +19,7 @@ $ npm install
 ```
 Now you need to configure the access to the database in the 'server.js' file. 
 Replace the following arguments with yours:
-```cpp
+```javascript
 var pool      =    mysql.createPool({
         connectionLimit : 100,
         host     : 'localhost',
